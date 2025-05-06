@@ -16,10 +16,27 @@ app.use(express.json());
 app.use(cookieParser());
 
 const cors = require('cors');
-app.use(cors({
-    origin : "*",
-    credentials: true
-}))
+
+const allowedOrigins = [process.env.RENDER_URL];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if(!origin || allowedOrigins.includes(origin)){
+      callback(null, true);
+    } 
+    else{
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+};
+
+app.use(cors(corsOptions));
+
+// app.use(cors({
+//     origin : "*",
+//     credentials: true
+// }))
 
 if(!process.env.SESSION_SECRET){
     console.error("SESSION_SECRET is missing in .env file!");
