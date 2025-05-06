@@ -17,7 +17,7 @@ app.use(cookieParser());
 
 const cors = require('cors');
 
-const allowedOrigins = [process.env.RENDER_URL];
+const allowedOrigins = ["https://edutech-message-application-frontend.onrender.com"];
 
 const corsOptions = {
   origin: function (origin, callback) {
