@@ -8,9 +8,11 @@ function MessagesInterface({ selectedUser }) {
 
     const currentUserId = useSelector((store) => store.user.userId);
 
+    const backendURL = import.meta.env.VITE_BACKEND_URL;
+
     async function fetchMessages(){
         try{
-            const response = await fetch(`http://localhost:5380/message/getMessages/${currentUserId}/${selectedUser._id}`);
+            const response = await fetch(`${backendURL}/message/getMessages/${currentUserId}/${selectedUser._id}`);
             const result = await response.json();
 
             if(result.success){
@@ -27,7 +29,7 @@ function MessagesInterface({ selectedUser }) {
             return;
 
         try{
-            const response = await fetch("http://localhost:5380/message/create_send_Message",{
+            const response = await fetch(`${backendURL}/message/create_send_Message`,{
                     method : "POST",
                     headers : {
                         "Content-Type": "application/json",

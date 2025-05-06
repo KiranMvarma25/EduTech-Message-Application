@@ -24,7 +24,10 @@ function UserSignUp(){
         }))
     }
 
-    let SignUpUrl = "http://localhost:5380/base/createUsers";
+    const backendURL = import.meta.env.VITE_BACKEND_URL;
+
+    // let SignUpUrl = "http://localhost:5380/base/createUsers";
+    let SignUpUrl = `${backendURL}/base/createUsers`;
 
     async function handleSubmit(e){
 

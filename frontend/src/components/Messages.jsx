@@ -10,10 +10,13 @@ function Messages(){
 
   const currentUserId = useSelector((store) => store.user.userId);
 
+  const backendURL = import.meta.env.VITE_BACKEND_URL;
+
   useEffect(() => {
     async function getAllUsers() {
       try{
-        let response = await fetch("http://localhost:5380/base/getUsers");
+        // let response = await fetch("http://localhost:5380/base/getUsers");
+        let response = await fetch(`${backendURL}/base/getUsers`);
         let result = await response.json();
         if(result.success) 
             setAllUsers(result.User);
@@ -27,7 +30,7 @@ function Messages(){
 
   async function fetchAllMessages() {
     try{
-      let response = await fetch(`http://localhost:5380/message/getAllMessages`);
+      let response = await fetch(`${backendURL}/message/getAllMessages`);
       let result = await response.json();
       if(result.success) 
         setMessages(result.Messages);
